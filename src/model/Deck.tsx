@@ -26,6 +26,12 @@ export class Deck {
         const {drawnCards}=this;
         return drawnCards[drawnCards.length-1];
     }
+
+    get secondLastDrawnCard():Card{
+        const {drawnCards}=this;
+        return drawnCards[drawnCards.length-2];
+    }
+
     drawCard(): Card{
         const random=Math.floor(Math.random()*this.availableCards.length);
         const drawnCards=this.availableCards.splice(random,1);
