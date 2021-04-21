@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import {Game} from './model/Game';
+import {Card} from './components/Card';
+import { Card as typeOfCard} from './model/Card';
 
-function App() {
+
+let game=new Game();
+
+function App(){
+  const [finished,setFinished]=useState(false);
+  const [lastDrawnCard,setLastDrawnCard]=useState<undefined | typeOfCard>(undefined);
+  
+  function handleDrawCard(){
+    console.log(game.drawCard());
+    setFinished(game.finished);
+    if(game.lastDrawnCard!==undefined)
+      setLastDrawnCard(game.lastDrawnCard);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Card card={lastDrawnCard}/>
+    <button disabled={finished} onClick={handleDrawCard}>Draw Card</button>
+    </>
   );
 }
 
